@@ -19,11 +19,10 @@
         term.loadAddon(new WebglAddon.WebglAddon())
         let socket = new WebSocket(`${(window.location.protocol == "http") ? "wss" : "ws"}://${window.location.hostname}:${window.location.port}/ws`)
         let orderbuf = {}
-        // possibly broken
         socket.onopen = () => {
             function raf() {
                 Object.keys(orderbuf).sort((a, b) => {
-                    return a + b
+                    return a - b
                 }).forEach((bufnum) => {
                     term.write(orderbuf[bufnum])
                     delete orderbuf[bufnum]
